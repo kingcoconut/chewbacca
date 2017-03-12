@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>PinPoint</title>
+      <meta name="viewport" content="width=device-width">
+      <script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+      <script type="text/javascript" src="student.js"></script>
+      <link href="/main.css" media="all" rel="stylesheet" />
+  </head>
+  <body>
+    <input id="student_range" type="range" value="<%= @value.try(:value) || 50 %>"/>
+    <button id="lost" class="fl">Lost</button>
+    <button id="clear" class="fr">Clear</button>
+  </body>
+</html>
