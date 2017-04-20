@@ -13,10 +13,21 @@ Faye::WebSocket.load_adapter('thin')
 
 configure do
   set :sockets, {instructor: []}
-  ActiveRecord::Base.establish_connection(
-    adapter: "sqlite3",
-    database: "database.db"
-  )
+
+  if ENV["RACK_ENV"] == "production"
+    ActiveRecord::Base.establish_connection(
+      adapter: "mysql2",
+      database: "production",
+      hostname: "chewbacca-prod.cxas9fabzgkq.ap-southeast-2.rds.amazonaws.com",
+      username: "root",
+      password: ENV["MYSQL_PASSWORD"]
+    )
+  else
+    ActiveRecord::Base.establish_connection(
+      adapter: "sqlite3",
+      database: "database.db"
+    )
+  end
 end
 
 after {ActiveRecord::Base.clear_active_connections!}
