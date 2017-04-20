@@ -6,6 +6,7 @@ require 'faye/websocket'
 require 'thin'
 require 'active_record'
 
+
 require_relative 'models/status.rb'
 
 Faye::WebSocket.load_adapter('thin')
@@ -20,13 +21,8 @@ end
 
 after {ActiveRecord::Base.clear_active_connections!}
 
-get "/instructor" do
-  @average = Status.average_value
-  erb :instructor
-end
-
 get "/" do
-  @value = Status.where(ip: request.ip).order("created_at DESC").first
+  @status = Status.where(ip: request.ip).order("created_at DESC").first
   erb :student
 end
 
@@ -40,6 +36,11 @@ post "/status" do
     end
   end
   json({}, encoder: :to_json, content_type: :json)
+end
+
+get "/instructor" do
+  @average = Status.average_value
+  erb :instructor
 end
 
 get "/socket" do

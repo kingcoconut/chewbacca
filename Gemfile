@@ -1,0 +1,7 @@
+source "https://rubygems.org"
+ruby "2.3.1"
+gem "active_record"
+gem "sinatra"
+gem "pry"
+gem "faye-websocket"
+gem "thin"

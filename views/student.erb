@@ -8,7 +8,7 @@
       <link href="/main.css" media="all" rel="stylesheet" />
   </head>
   <body>
-    <input id="student_range" type="range" value="<%= @value.try(:value) || 50 %>"/>
+    <input id="student_range" type="range" value="<%= @status.try(:value) || 50 %>"/>
     <button id="lost" class="fl">Lost</button>
     <button id="clear" class="fr">Clear</button>
   </body>
